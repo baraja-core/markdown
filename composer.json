@@ -1,7 +1,7 @@
 {
-	"name": "baraja-core/template",
-	"description": "This is a template package.",
-	"homepage": "https://github.com/baraja-core/template",
+	"name": "baraja-core/markdown",
+	"description": "Common markdown renderer service.",
+	"homepage": "https://github.com/baraja-core/markdown",
 	"authors": [
 		{
 			"name": "Jan Barášek",
@@ -9,7 +9,12 @@
 		}
 	],
 	"require": {
-		"php": "^8.0"
+		"php": "^8.0",
+		"nette/utils": "^3.2",
+		"nette/application": "^3.1",
+		"nette/di": "^3.0",
+		"league/commonmark": "^2.0",
+		"baraja-core/url": "^1.1"
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^1.0",
