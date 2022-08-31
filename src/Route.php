@@ -29,7 +29,7 @@ final class Route
 
 
 	/**
-	 * @param mixed[] $params
+	 * @param string[] $params
 	 */
 	public function __construct(
 		string $module = null,
