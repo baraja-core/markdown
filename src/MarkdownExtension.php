@@ -13,8 +13,8 @@ final class MarkdownExtension extends CompilerExtension
 	{
 		$builder = $this->getContainerBuilder();
 
-		$builder->addDefinition($this->prefix('renderer'))
-			->setFactory(Markdown::class);
+		$builder->addDefinition($this->prefix('commonMarkRenderer'))
+			->setFactory(CommonMarkRenderer::class);
 
 		$builder->addDefinition($this->prefix('markdown'))
 			->setFactory(Markdown::class);
