@@ -1,4 +1,10 @@
-Template
-========
+Markdown renderer in PHP
+========================
 
-This is a template package.
+A simple library to render markdown in PHP.
+
+```php
+$markdown = new Markdown;
+
+echo $markdown->render('Hello **world**!');
+```
