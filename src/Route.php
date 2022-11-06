@@ -65,10 +65,7 @@ final class Route
 				if ($paramKey === 'id') {
 					$id = $paramParser['value'];
 				}
-
-				$params[$paramKey] = \is_string($paramParser['value'])
-					? trim($paramParser['value'], '\'"')
-					: $paramParser['value'];
+				$params[$paramKey] = trim($paramParser['value'], '\'"');
 			}
 		}
 

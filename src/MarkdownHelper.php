@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Baraja\Markdown;
 
 
-final class Helpers
+final class MarkdownHelper
 {
 	/** @throws \Error */
 	public function __construct()
@@ -29,12 +29,13 @@ final class Helpers
 
 	public static function parseDomain(string $url): ?string
 	{
-		$domainPattern = '/^(?:https?:\/\/)?(?<subdomain>[^\/]*?)(?<domain>localhost|(?:\d{1,3}\.?){4}|(?:(?:[a-z0-9-]+)\.(?:[a-z0-9-]+)))(?:\/|$)/';
-		if (preg_match($domainPattern, strtolower($url), $parser) === 1) {
-			return (string) ($parser['domain'] ?? '');
-		}
-
-		return null;
+		return preg_match(
+			'/^(?:https?:\/\/)?(?<subdomain>[^\/]*?)(?<domain>localhost|(?:\d{1,3}\.?){4}|(?:(?:[a-z0-9-]+)\.(?:[a-z0-9-]+)))(?:\/|$)/',
+			strtolower($url),
+			$parser,
+		) === 1
+			? ($parser['domain'] ?? '')
+			: null;
 	}
 
 
