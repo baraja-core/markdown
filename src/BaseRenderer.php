@@ -20,7 +20,7 @@ abstract class BaseRenderer implements Renderer
 
 
 	public function __construct(
-		private LinkGenerator $linkGenerator,
+		private ?LinkGenerator $linkGenerator = null,
 		private ?Translator $translator = null,
 	) {
 	}
@@ -62,24 +62,26 @@ abstract class BaseRenderer implements Renderer
 			$content,
 		);
 
-		$content = (string) preg_replace_callback( // n:href="..." Nette links
-			'/n:href="(?<link>[^"]*)"/',
-			function (array $match): string {
-				try {
-					$route = Route::createByPattern($match['link']);
+		if ($this->linkGenerator !== null) {
+			$content = (string) preg_replace_callback( // n:href="..." Nette links
+				'/n:href="(?<link>[^"]*)"/',
+				function (array $match): string {
+					try {
+						$route = Route::createByPattern($match['link']);
 
-					return 'href="' . $this->linkGenerator->link(
-						$route->getPresenterName() . ':' . $route->getActionName(),
-						$route->getParams(),
-					) . '"';
-				} catch (InvalidLinkException | \InvalidArgumentException $e) {
-					trigger_error($e->getMessage());
+						return 'href="' . $this->linkGenerator->link(
+							$route->getPresenterName() . ':' . $route->getActionName(),
+							$route->getParams(),
+						) . '"';
+					} catch (InvalidLinkException | \InvalidArgumentException $e) {
+						trigger_error($e->getMessage());
 
-					return 'href="#INVALID_LINK"';
-				}
-			},
-			$content,
-		);
+						return 'href="#INVALID_LINK"';
+					}
+				},
+				$content,
+			);
+		}
 
 		$ignoreContents = [];
 		$content = (string) preg_replace_callback(

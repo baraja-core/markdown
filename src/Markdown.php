@@ -15,11 +15,14 @@ final class Markdown extends BaseRenderer
 		'\)' => 'LATEX-R',
 	];
 
+	private ConverterAccessor $commonMarkConverter;
+
 
 	public function __construct(
-		private ConverterAccessor $commonMarkConverter,
-		LinkGenerator $linkGenerator,
+		?ConverterAccessor $commonMarkConverter = null,
+		?LinkGenerator $linkGenerator = null,
 	) {
+		$this->commonMarkConverter = $commonMarkConverter ?? new ConverterAccessor;
 		parent::__construct($linkGenerator);
 	}
 
