@@ -96,7 +96,7 @@ abstract class BaseRenderer implements Renderer
 
 		$content = (string) preg_replace_callback( // URL inside text
 			'/(.|\n|^)((?i)\b(?:(?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'\\\\".,<>?«»“”‘’])))/u',
-			static fn(array $match): string => $match[1] === '"' || $match[1] === '\''
+			fn(array $match): string => $match[1] === '"' || $match[1] === '\''
 				? $match[0]
 				: $match[1] . $this->renderLink(htmlspecialchars_decode(trim($match[2] ?? '')), $baseUrl),
 			$content,
