@@ -32,10 +32,10 @@ final class Route
 	 * @param string[] $params
 	 */
 	public function __construct(
-		string $module = null,
+		?string $module = null,
 		string $presenter = self::DEFAULT_PRESENTER,
 		string $action = self::DEFAULT_ACTION,
-		string $id = null,
+		?string $id = null,
 		array $params = [],
 	) {
 		$this->module = $module !== '' ? $module : null;

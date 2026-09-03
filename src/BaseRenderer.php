@@ -110,13 +110,13 @@ abstract class BaseRenderer implements Renderer
 
 		$content = (string) preg_replace_callback( // Translate macros
 			'/(\{_\})(?<haystack>.+?)(\{\/_\})/', // {_}hello{/_}
-			fn(array $match): string => $this->getTranslator()->translate($match['haystack']),
+			fn(array $match): string => (string) $this->getTranslator()->translate($match['haystack']),
 			$content,
 		);
 
 		$content = (string) preg_replace_callback( // Alternative translate macros
 			'/\{_(?:(?<haystack>.*?))\}/', // {_hello}, {_'hello'}, {_"hello"}
-			fn(array $match): string => $this->getTranslator()->translate(trim($match['haystack'], '\'"')),
+			fn(array $match): string => (string) $this->getTranslator()->translate(trim($match['haystack'], '\'"')),
 			$content,
 		);
 
